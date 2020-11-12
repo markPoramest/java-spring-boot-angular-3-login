@@ -28,4 +28,16 @@ public class RegistrationService {
     public User findByEmailAndPassword(String email, String password){
         return repository.findByEmailAndPassword(email,password);
     }
+
+    public User findById(Long id){
+       return repository.findById(id).isPresent()?repository.findById(id).get():null;
+    }
+
+    public User delete(Long id){
+        User user = findById(id);
+        if(user!=null)
+            repository.deleteById(id);
+        return  user;
+
+    }
 }
